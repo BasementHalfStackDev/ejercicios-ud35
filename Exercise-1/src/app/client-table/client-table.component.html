@@ -22,6 +22,12 @@
         <td>Av. lo lo lo</td>
         <td>2</td>
       </tr>
+      <tr *ngFor="let client of clients">
+        <td>{{ client.name }}</td>
+        <td>{{ client.cif }}</td>
+        <td>{{ client.address }}</td>
+        <td>{{ client.group }}</td>
+      </tr>
     </tbody>
     <tr></tr>
   </table>
