@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Exercise-2';
+  contactDataViewer: any;
+  contactData: any;
 }

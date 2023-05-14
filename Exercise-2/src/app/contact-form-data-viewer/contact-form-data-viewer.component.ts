@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ContactData } from 'model/ContactData';
-import { ContactDataService } from 'service/contact-data.service';
+import { ContactData } from '../model/ContactData';
+import { ContactFormServiceService } from '../service/contact-form-service.service';
+
 
 @Component({
   selector: 'app-contact-form-data-viewer',
@@ -10,10 +11,11 @@ import { ContactDataService } from 'service/contact-data.service';
 export class ContactFormDataViewerComponent implements OnInit {
 
   contactData: ContactData = new ContactData('','','');
-  constructor(private contactDataService: ContactDataService) { }
+
+  constructor(private contactFormService: ContactFormServiceService) { };
 
   ngOnInit() {
-    this.contactDataService.contactData$.subscribe(contactData => {
+    this.contactFormService.contactData$.subscribe(contactData => {
       this.contactData = contactData;
     });
   }

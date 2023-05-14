@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ContactData } from 'model/ContactData';
-import { ContactDataService } from 'service/contact-data.service';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ContactData } from '../model/ContactData';
+import { ContactFormServiceService } from '../service/contact-form-service.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -13,10 +13,9 @@ export class ContactFormComponent {
   message: string = '';
   robotCheck: number = 0;
 
+  constructor(private contactFormService: ContactFormServiceService) { };
 
-  constructor(private contactDataService: ContactDataService) { }
-
-  onSubmit(): void {
+  onSubmit() {
 
     if (this.name == '') {
       // error
@@ -27,8 +26,14 @@ export class ContactFormComponent {
     } else if (this.robotCheck != 10) {
       // error
     } else {
-      let contactInfo = new ContactData(this.name, this.email, this.message);
-      this.contactDataService.contactData = contactInfo;
+      const contactData = new ContactData(this.name, this.email, this.message);
+
+      this.contactFormService.addContactData(contactData);
+
+      this.name='';
+      this.email='';
+      this.message='';
+      this.robotCheck=0;
     }
 
   }
